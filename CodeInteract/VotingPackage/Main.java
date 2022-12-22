@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.codeinteracts.ems.Employee;
-
 public class Main {
 
 	public static void main(String[] args)
@@ -106,17 +104,24 @@ public class Main {
 					} catch (IOException e) {
 						System.out.println("Can't register voter. Please try again later.");
 						e.printStackTrace();
+						continue;
 					}
+					break;
+//*======================================================================
 				} else if (choice == 2) {
 					try {
 						vs.VoterList(voter);
 					} catch (IOException e) {
 						throw new RuntimeException(e);
 					}
+//*===================================================================
 
 				} else if (choice == 3) {
 					System.out.println("Enter age");
 					int age = scan.nextInt();
+					if (age < 18) {
+						System.out.println("Not valid age");
+					}
 					System.out.println("Enter first name:");
 					String firstName = scan.next();
 
@@ -173,6 +178,7 @@ public class Main {
 					} catch (IOException e) {
 						System.out.println("Can't register voter. Please try again later.");
 						e.printStackTrace();
+
 					}
 				}
 //*====================================================================================
@@ -183,7 +189,7 @@ public class Main {
 						throw new RuntimeException(e);
 					}
 				}
-//*=========================================================================
+//*==========================================================================================
 				else if (choice == 5) {
 					System.out.println("Enter username");
 					String username = scan.next();
@@ -202,7 +208,7 @@ public class Main {
 						e.printStackTrace();
 					}
 				}
-//*==============================================================
+//*==============================================================================================
 				else if (choice == 6) {
 					System.out.println("Enter username");
 					String username = scan.next();
@@ -223,11 +229,12 @@ public class Main {
 				}
 //*==================================================================================================================				
 				else if (choice == 7) {
-					try {
-						vs.doVote();
-					} catch (IOException e) {
-						throw new RuntimeException(e);
-					}
+					System.out.println("Enter Voter id to vote");
+					int voterid = scan.nextInt();
+					System.out.println("Enter candidate id to vote");
+					int candidateid = scan.nextInt();
+
+					vs.doVote(voterid, candidateid);
 				}
 //*================================================================================================
 				else if (choice == 8) {
@@ -238,7 +245,6 @@ public class Main {
 					}
 
 				}
-
 				// *====================================================
 				else if (choice == 9) {
 					System.out.println("Logged out successfully!");

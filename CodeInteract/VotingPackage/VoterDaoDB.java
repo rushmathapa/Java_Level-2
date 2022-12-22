@@ -98,8 +98,8 @@ public class VoterDaoDB implements VoterDaoInterface {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-			String query = "select * from election.voters where username ='" + username + "' and password='" + password
-					+ "'";
+			String query = "select * from election.voters where voter_username ='" + username + "' and voter_password='"
+					+ password + "'";
 			System.out.println(query);
 
 			statement = con.createStatement();
@@ -176,7 +176,7 @@ public class VoterDaoDB implements VoterDaoInterface {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-			String query = "SELECT * from voters";
+			String query = "SELECT * from candidate";
 
 			// System.out.println(query);
 
@@ -194,6 +194,7 @@ public class VoterDaoDB implements VoterDaoInterface {
 				candidate.setUserName(results.getString(6));
 				candidate.setPassword(results.getString(7));
 				candidate.setSymbol(results.getString(8));
+				System.out.println(candidate);
 
 			}
 
@@ -223,8 +224,8 @@ public class VoterDaoDB implements VoterDaoInterface {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-			String query = "select * from election.candidate where username ='" + username + "' and password='"
-					+ password + "'";
+			String query = "select * from election.candidate where candidate_username ='" + username
+					+ "' and candidate_password='" + password + "'";
 			System.out.println(query);
 
 			statement = con.createStatement();
@@ -263,15 +264,15 @@ public class VoterDaoDB implements VoterDaoInterface {
 
 	// *=================================================================
 
-	public Voter doVote() throws IOException, ClassNotFoundException, SQLException {
+	public Voter doVote(int voterid, int candidateid) throws IOException, ClassNotFoundException, SQLException {
+
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Voter voter = null;
-		Candidate candidate = null;
+		Candidate candidate = new Candidate(voterid, candidateid);
 
 		Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-		@SuppressWarnings("null")
-		String insertQuery = "INSERT INTO votes (voter_id,candidate_id)" + "value (" + voter.getVoterID() + ','
+		String insertQuery = "INSERT INTO votes (voter_id,candidate_id)" + "value (" + candidate.voterid + ','
 				+ candidate.getCandidateid() + ")";
 
 		System.out.println(insertQuery);
@@ -299,17 +300,18 @@ public class VoterDaoDB implements VoterDaoInterface {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-			String query = "select count(*)from election.votes where candidate_id in (select symbol from election.candidate where symbol = republic"
-					+ "'";
+			String query = ("select count(*)from election.votes where candidate_id =3");
 			System.out.println(query);
 
 			statement = con.createStatement();
 			ResultSet results = statement.executeQuery(query);
 
-			int vote = 0;
+			//int vote = 0;
 			if (results.next()) {
-				vote = results.getInt(vote);
-				vote++;
+				results.getInt(1);
+				System.out.println(results);
+				//vote = results.getInt(vote);
+				//vote++;
 
 			}
 		} catch (ClassNotFoundException e) {

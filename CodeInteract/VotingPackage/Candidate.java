@@ -1,6 +1,7 @@
 package VotingPackage;
 
 public class Candidate {
+	public int voterid;
 	private int candidateid;
 	private int age;
 	private String fname;
@@ -14,6 +15,8 @@ public class Candidate {
 	public Candidate() {
 
 	}
+	
+	
 
 	public Candidate(int candidateid, int age, String firstName, String lastName, Gender g, String username, String password,
 			String symbol) {
@@ -37,6 +40,19 @@ public class Candidate {
 		this.password = password;
 		this.symbol = symbol;
 	}
+	
+
+	/**
+	 * @param voterid
+	 * @param candidateid
+	 */
+	public Candidate(int voterid, int candidateid) {
+		super();
+		this.voterid = voterid;
+		this.candidateid = candidateid;
+	}
+
+
 
 	public int getCandidateid() {
 		return candidateid;

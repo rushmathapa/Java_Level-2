@@ -13,6 +13,7 @@ public class Voter {
 	private String password;
 
 	private UserType userType;
+	
 
 	public Voter() {
 

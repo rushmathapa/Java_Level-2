@@ -59,10 +59,10 @@ public class VotingService {
 	}
 
 	// *-----------------------------------------------------------------------------------------------------------------------------------------
-	public Voter doVote() throws IOException, ClassNotFoundException, SQLException {
+	public Voter doVote(int voterid, int candidateid) throws IOException, ClassNotFoundException, SQLException {
 		try {
 			VoterDaoInterface dao = new VoterDaoDB();
-           dao.doVote();
+           dao.doVote(voterid,candidateid);
         } catch (SQLIntegrityConstraintViolationException e) {
             e.printStackTrace();
             System.out.println("Faild to registered you already vote");
@@ -74,7 +74,7 @@ public class VotingService {
 	//*================================================================================================================
 	public void voteCount() throws IOException,ClassNotFoundException, SQLException {
 		VoterDaoInterface dao = new VoterDaoDB();
-		
+		dao.voteCount();
 	}
 	
 	public Voter searchByUsername(String username) throws IOException, ClassNotFoundException, SQLException {

@@ -11,7 +11,7 @@ public interface VoterDaoInterface {
 	public Candidate candidateRegistration(Candidate candidate)throws IOException, ClassNotFoundException, SQLException ;
 	public Candidate candidateList()throws IOException, ClassNotFoundException, SQLException ;
 	public Candidate searchByCandidateUserNameAndPassword(String username, String password);
-	public Voter doVote() throws IOException, ClassNotFoundException, SQLException ;
+	public Voter doVote(int voterid, int candidateid) throws IOException, ClassNotFoundException, SQLException ;
 	public void voteCount() throws IOException,ClassNotFoundException, SQLException;
 	public Voter searchByUsername(String username)throws IOException, ClassNotFoundException, SQLException ;
 	
